@@ -1,32 +1,14 @@
 package org.launchcode.codingevents.models;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Objects;
 
-/**
- * Created by Chris Bay
- */
 public class Event {
 
     private int id;
     private static int nextId = 1;
 
     private EventType type;
-
-    public Event(String name, String description, String contactEmail, EventType type) {
-        this();
-        this.name = name;
-        this.description = description;
-        this.contactEmail = contactEmail;
-        this.type = type;
-    }
-
-    public Event() {
-        this.id = nextId;
-        nextId++;
-    }
 
     @NotBlank(message = "Name is required")
     @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
@@ -38,6 +20,23 @@ public class Event {
     @NotBlank(message = "Email is required")
     @Email(message = "Invalid email. Try again.")
     private String contactEmail;
+
+    @DecimalMin(value = "0.0", inclusive = true, message = "Minimum cost is zero.")
+    private double cost;
+
+    public Event(String name, String description, String contactEmail, EventType type, double cost) {
+        this();
+        this.name = name;
+        this.description = description;
+        this.contactEmail = contactEmail;
+        this.type = type;
+        this.cost = cost;
+    }
+
+    public Event() {
+        this.id = nextId;
+        nextId++;
+    }
 
     public String getName() {
         return name;
@@ -69,6 +68,14 @@ public class Event {
 
     public void setType(EventType type) {
         this.type = type;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 
     public int getId() {
