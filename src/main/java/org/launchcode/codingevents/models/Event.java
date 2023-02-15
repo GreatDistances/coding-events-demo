@@ -21,15 +21,27 @@ public class Event {
     @Email(message = "Invalid email. Try again.")
     private String contactEmail;
 
+    @NotBlank(message = "Location is required")
+    private String location;
+
+    @Min(value = 1, message = "Events have a minimum attendee count of 1")
+    private int attendees;
+
+    @AssertTrue(message = "All events require registration")
+    private Boolean mustRegister;
+
     @DecimalMin(value = "0.0", inclusive = true, message = "Minimum cost is zero.")
     private double cost;
 
-    public Event(String name, String description, String contactEmail, EventType type, double cost) {
+    public Event(String name, String description, String contactEmail, EventType type, String location, Boolean mustRegister, double cost) {
         this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
         this.type = type;
+        this.location = location;
+        this.attendees = attendees;
+        this.mustRegister = mustRegister;
         this.cost = cost;
     }
 
@@ -68,6 +80,30 @@ public class Event {
 
     public void setType(EventType type) {
         this.type = type;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public int getAttendees() {
+        return attendees;
+    }
+
+    public void setAttendees(int attendees) {
+        this.attendees = attendees;
+    }
+
+    public Boolean getMustRegister() {
+        return mustRegister;
+    }
+
+    public void setMustRegister(Boolean mustRegister) {
+        this.mustRegister = mustRegister;
     }
 
     public double getCost() {
