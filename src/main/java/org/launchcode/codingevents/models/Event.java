@@ -12,7 +12,7 @@ import java.util.Objects;
  * Created by Chris Bay
  */
 @Entity
-public class Event {
+public class Event extends AbstractEntity {
 
     @Id
     @GeneratedValue
