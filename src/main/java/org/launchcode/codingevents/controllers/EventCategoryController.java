@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
+
 @Controller
 public class EventCategoryController {
 
@@ -26,12 +28,12 @@ public class EventCategoryController {
     @GetMapping("eventCategories/create")
     public String renderCreateEventCategoryForm(Model model) {
         model.addAttribute("title", "Create Category");
-        model.addAttribute("category", eventCategoryRepository.save(new EventCategory())); // TODO fix ??
+        model.addAttribute("categories", new EventCategory());
         return "eventCategories/create";
     }
 
     @PostMapping("eventCategories/create")
-    public String processCreateEventCategoryForm(@ModelAttribute EventCategory newEventCategory, Model model, Errors errors) {
+    public String processCreateEventCategoryForm(@Valid @ModelAttribute EventCategory newEventCategory, Model model, Errors errors) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Create Category");
@@ -40,7 +42,7 @@ public class EventCategoryController {
         } else {
             model.addAttribute("newCategory", eventCategoryRepository.save(newEventCategory));
         }
-        return "redirect:";
+        return "eventCategories/index";
     }
 
 

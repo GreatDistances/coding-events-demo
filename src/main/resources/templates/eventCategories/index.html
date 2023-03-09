@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
-</head>
+<head th:replace="fragments :: head"></head>
 <body>
 
-<h1 th:text="${title}"></h1>
+<header th:replace="fragments :: header"></header>
 
-<table>
+<table class="table table-striped">
+    <thead>
     <tr>
-        <th>Event Categories</th>
+        <th>Category Name</th>
     </tr>
+    </thead>
     <tr th:each="category : ${categories}">
         <td th:text="${category.name}"></td>
     </tr>
+
 </table>
 
 </body>
